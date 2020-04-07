@@ -18,9 +18,9 @@
             <div class="row">
                 @foreach ($videos as $video)
                     <div class="col-sm-3">
-                            <a href ="{{URL::to('/watch/'.$video->id)}}" class="video_nho">
+                            <a href ="{{URL::to('/watch/'.$video->id)}}" class="video_nho btn">
                                 <img src="{{asset('storage/'.$video->video_image_avt)}}" class="img-responsive" style="width:200px, height:150px" alt="Image">
-                                <p> {{ $video->video_name }}</p>
+                                <span> {{ $video->video_name }}</span>
                             </a>
                     </div>
                 @endforeach

@@ -49678,6 +49678,8 @@ __webpack_require__(/*! C:\xampp\htdocs\VideoChannel\Video\resources\js\app.js *
 module.exports = __webpack_require__(/*! C:\xampp\htdocs\VideoChannel\Video\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
+
 /***/ })
 
 /******/ });
+
