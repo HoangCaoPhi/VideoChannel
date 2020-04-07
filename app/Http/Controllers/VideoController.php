@@ -14,10 +14,9 @@ class VideoController extends Controller
 {
     //
     public function getAllVideos($id) {
-        $user_id = Auth::id();
         $videos = Video::find($id);
         $videoRelation = Video::paginate(15);
-        return view('videos.video_detail', compact('videos','user_id', 'videoRelation'));   
+        return view('videos.video_detail', compact('videos', 'videoRelation'));   
     }
     public function getAllVideosProfile($id) {
         $user_id = Auth::id();
@@ -25,9 +24,8 @@ class VideoController extends Controller
         return view('layouts.profile', compact('videos', 'user_id'));
     }
     public function getEditVideo($id) {
-        $user_id = Auth::id();
         $videos = Video::whereId($id)->get();
-        return view('videos.edit', compact('videos', 'id', 'user_id'));
+        return view('videos.edit', compact('videos', 'id'));
     }
     public function EditVideo(Request $request, $id) {
         $validatedData = $request->validate([
@@ -76,24 +74,23 @@ class VideoController extends Controller
         return redirect('/')->with('success', 'Upload video thành công');
     }
     public function getUploadVideo(Request $request) {
-        $user_id = Auth::id();
+        $user_id =   Auth::id();
         return view('videos.upload', compact('user_id'));
     }
     public function search(Request $request) {
-        $user_id = Auth::id();
         $keyword = $request->video_search;
         $videos = Video::where('video_name','like','%'.$keyword.'%')->get();
         if(!$keyword) {
             Session::put('messeage','Bạn chưa nhập gì vào ô tìm kiếm!!!');
-            return view('videos.search', compact('videos', 'user_id'));
+            return view('videos.search', compact('videos'));
         }
         if(count($videos) > 0) {
             Session::put('messeage','Video được tìm thấy');
-            return view('videos.search', compact('videos', 'user_id'));
+            return view('videos.search', compact('videos'));
         }
         else {
             Session::put('messeage','Không tìm thấy video của bạn !!!');
-            return view('videos.search', compact('videos', 'user_id'));
+            return view('videos.search', compact('videos'));
         } 
     }
 }
