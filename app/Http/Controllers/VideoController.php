@@ -16,7 +16,7 @@ class VideoController extends Controller
     public function getAllVideos($id) {
         $user_id = Auth::id();
         $videos = Video::find($id);
-        $videoRelation = Video::paginate(15)->random(4);
+        $videoRelation = Video::paginate(15);
         return view('videos.video_detail', compact('videos','user_id', 'videoRelation'));   
     }
     public function getAllVideosProfile($id) {
