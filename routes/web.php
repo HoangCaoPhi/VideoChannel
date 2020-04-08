@@ -34,22 +34,22 @@ Route::get('/search', 'VideoController@search');
 
 ########################################## ADMIN #####################################
 
-Route::get('/login/admin', 'Auth\LoginController@showAdminLoginForm');
+Route::get('/login/admin', 'Auth\LoginController@showAdminLoginForm')->name('getLoginAdmin');
 Route::get('/register/admin', 'Auth\RegisterController@showAdminRegisterForm');
-Route::post('/login/admin', 'Auth\LoginController@adminLogin');
+Route::post('/login/admin', 'Auth\LoginController@adminLogin')->name('getLoginAdmin');
 Route::post('/register/admin', 'Auth\RegisterController@createAdmin');
 
 // Lấy ra tổng số video và người dùng
-Route::get('/admin', 'AdminController@getAll');
-Route::get('/admin/user','AdminController@getUser')->name('listUser');
-Route::get('/admin/video','AdminController@getVideo')->name('listVideo');
+Route::get('/admin', 'AdminController@getAll')->name('getAll')->middleware('admin');
+Route::get('/admin/user','AdminController@getUser')->name('listUser')->middleware('admin');
+Route::get('/admin/video','AdminController@getVideo')->name('listVideo')->middleware('admin');
 
-Route::get('/admin/video/edit/{id}', 'AdminController@getEditVideo')->name('adminEditVideo');
-Route::post('/admin/video/edit/{id}', 'AdminController@editVideo')->name('adminEditVideo');;
-Route::get('/admin/video/delete/{id}', 'AdminController@deleteVideo')->name('adminDeleteVideo');
-Route::get('/admin/video/add', 'AdminController@getAddVideo')->name('adminAddVideo');
-Route::post('/admin/video/add', 'AdminController@addVideo')->name('adminAddVideo');
+Route::get('/admin/video/edit/{id}', 'AdminController@getEditVideo')->name('adminEditVideo')->middleware('admin');
+Route::post('/admin/video/edit/{id}', 'AdminController@editVideo')->name('adminEditVideo')->middleware('admin');
+Route::get('/admin/video/delete/{id}', 'AdminController@deleteVideo')->name('adminDeleteVideo')->middleware('admin');
+Route::get('/admin/video/add', 'AdminController@getAddVideo')->name('adminAddVideo')->middleware('admin');
+Route::post('/admin/video/add', 'AdminController@addVideo')->name('adminAddVideo')->middleware('admin');
 
-Route::get('/admin/user/add', 'AdminController@getAddddUser')->name('addUser');
-Route::post('/admin/user/add', 'AdminController@addUser')->name('addUser');
-Route::get('/admin/user/delete/{id}', 'AdminController@deleteUser')->name('deleteUser');
+Route::get('/admin/user/add', 'AdminController@getAddddUser')->name('addUser')->middleware('admin');
+Route::post('/admin/user/add', 'AdminController@addUser')->name('addUser')->middleware('admin');
+Route::get('/admin/user/delete/{id}', 'AdminController@deleteUser')->name('deleteUser')->middleware('admin');
